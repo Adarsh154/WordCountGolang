@@ -29,9 +29,10 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
+	port := ":8080"
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", HealthCheck)
 	router.HandleFunc("/event", createEvent).Methods("POST")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	fmt.Println(" Server started and Listening on port ", port)
+	log.Fatal(http.ListenAndServe(port, router))
 }

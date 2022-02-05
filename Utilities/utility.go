@@ -1,6 +1,8 @@
 package Utilities
 
 import (
+	"log"
+	"regexp"
 	"sort"
 	"strings"
 )
@@ -16,6 +18,7 @@ func (p PairList) Len() int           { return len(p) }
 func (p PairList) Less(i, j int) bool { return p[i].Count < p[j].Count }
 func (p PairList) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
+// rankByWordCount finds the top 10 repeated words from the word count map
 func rankByWordCount(wordFrequencies map[string]int) PairList {
 	pl := make(PairList, len(wordFrequencies))
 	i := 0
@@ -27,11 +30,20 @@ func rankByWordCount(wordFrequencies map[string]int) PairList {
 	return pl[:10]
 }
 
+// Repetition Calculates word count in a map
 func Repetition(st string) PairList {
+	// Processing string before counting
+	reg, err := regexp.Compile("[^a-zA-Z0-9]+")
 
-	input := strings.Fields(st)
+	if err != nil {
+		log.Fatal(err)
+	}
+	processedString := reg.ReplaceAllString(st, " ")
+	SliceString := strings.Fields(processedString)
+
+	//Word count
 	wc := make(map[string]int)
-	for _, word := range input {
+	for _, word := range SliceString {
 		if _, ok := wc[word]; ok {
 			wc[word] += 1
 		} else {
