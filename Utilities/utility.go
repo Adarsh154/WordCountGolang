@@ -44,6 +44,7 @@ func Repetition(st string) PairList {
 	//Word count
 	wc := make(map[string]int)
 	for _, word := range SliceString {
+		word = strings.ToLower(word)
 		if _, ok := wc[word]; ok {
 			wc[word] += 1
 		} else {
