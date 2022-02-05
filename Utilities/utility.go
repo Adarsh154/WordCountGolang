@@ -27,7 +27,10 @@ func rankByWordCount(wordFrequencies map[string]int) PairList {
 		i++
 	}
 	sort.Sort(sort.Reverse(pl))
-	return pl[:10]
+	if len(pl) > 10 {
+		return pl[:10]
+	}
+	return pl
 }
 
 // Repetition Calculates word count in a map
