@@ -27,9 +27,6 @@ func rankByWordCount(wordFrequencies map[string]int) PairList {
 		i++
 	}
 	sort.Sort(sort.Reverse(pl))
-	if len(pl) > 10 {
-		return pl[:10]
-	}
 	return pl
 }
 
